@@ -1,0 +1,1128 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "A simple API",
+    "version" : "1.0.0",
+    "title" : "Metropolis API"
+  },
+  "host" : "tfobtv78w5.execute-api.us-east-1.amazonaws.com",
+  "basePath" : "/v1",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/candidates" : {
+      "get" : {
+        "operationId" : "searchCandidates",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "skip",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "searchString",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArrayOfCandidate"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "addCandidate",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Candidate",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Candidate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Candidate"
+            }
+          },
+          "201" : {
+            "description" : "201 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          },
+          "409" : {
+            "description" : "409 response"
+          }
+        }
+      },
+      "put" : {
+        "operationId" : "updateCandidate",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Candidate",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Candidate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "201 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          },
+          "409" : {
+            "description" : "409 response"
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "deleteCandidate",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Candidate",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Candidate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "201 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          },
+          "409" : {
+            "description" : "409 response"
+          }
+        }
+      }
+    },
+    "/getsignedurl" : {
+      "post" : {
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/StatusResponse"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/StatusResponse"
+            },
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listings" : {
+      "get" : {
+        "operationId" : "GetListings",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ListingRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ListingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Listing"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "CreateListings",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Listing",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Listing"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "put" : {
+        "operationId" : "UpdateListings",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Listing",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Listing"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "DeleteListings",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ListingRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ListingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/listings/analytics" : {
+      "post" : {
+        "operationId" : "getAnalytics",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ListingRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ListingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArrayOfAnalyticsModelResponse"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/listings/candidates" : {
+      "post" : {
+        "operationId" : "getlistingsCandidates",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ListingRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ListingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArrayOfListingsCandidates"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/listings/match" : {
+      "post" : {
+        "operationId" : "postListingCandidates",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ListingsCandidates",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ListingsCandidates"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/listings/match/status" : {
+      "post" : {
+        "operationId" : "getMatchStatus",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ListingRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ListingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/StatusResponse"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/listings/quickinfo" : {
+      "post" : {
+        "operationId" : "quickinfoListings",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ListingRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ListingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/QuickinfoResponse"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/listings/search" : {
+      "post" : {
+        "operationId" : "searchListings",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "SearchRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SearchRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArrayOfListings"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/listings/status" : {
+      "post" : {
+        "operationId" : "statusListings",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "ListingRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ListingRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/StatusResponse"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/organizations" : {
+      "get" : {
+        "operationId" : "GetOrganizations",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "OrganizationRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OrganizationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Organization"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "addOrganization",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Organization",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Organization"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "put" : {
+        "operationId" : "UpdateOrganization",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Organization",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Organization"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "DeleteOrganization",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "OrganizationRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OrganizationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/organizations/docs" : {
+      "get" : {
+        "operationId" : "GetOrganizationDocuments",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "OrganizationRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OrganizationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/OrgDocuments"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "post" : {
+        "operationId" : "searchOrgDocs",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Organization",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Organization"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "put" : {
+        "operationId" : "updateOrganizationDocument",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "OrgDocuments",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OrgDocuments"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      },
+      "delete" : {
+        "operationId" : "DeleteOrgDocument",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "OrganizationRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OrganizationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/organizations/quickinfo" : {
+      "post" : {
+        "operationId" : "organizationsQuickinfo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "OrganizationRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OrganizationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/QuickinfoResponse"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/organizations/search" : {
+      "post" : {
+        "operationId" : "searchOrganization",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "SearchRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SearchRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/ArrayOfOrganizations"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/organizations/users/search" : {
+      "post" : {
+        "operationId" : "usersSearch",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "OrganizationRequest",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/OrganizationRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/UserResponse"
+            }
+          },
+          "400" : {
+            "description" : "400 response"
+          }
+        }
+      }
+    },
+    "/python-backend" : {
+      "x-amazon-apigateway-any-method" : {
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          }
+        },
+        "security" : [ {
+          "sigv4" : [ ]
+        } ]
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "sigv4" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header",
+      "x-amazon-apigateway-authtype" : "awsSigv4"
+    }
+  },
+  "definitions" : {
+    "Candidate" : {
+      "type" : "object",
+      "required" : [ "accountPaused", "additionalLanguage", "candidateBio", "certifications", "currentLocation", "email", "firstName", "graduationDate", "id", "lastName", "phone", "preferredContact", "specialty", "visaRequired" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "currentLocation" : {
+          "$ref" : "#/definitions/currentLocation"
+        },
+        "preferredLocation" : {
+          "$ref" : "#/definitions/preferredLocation"
+        },
+        "specialty" : {
+          "type" : "string"
+        },
+        "certifications" : {
+          "type" : "string"
+        },
+        "candidateBio" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "phone" : {
+          "type" : "string"
+        },
+        "graduationDate" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "preferredContact" : {
+          "type" : "string"
+        },
+        "visaRequired" : {
+          "type" : "string"
+        },
+        "additionalLanguage" : {
+          "type" : "string"
+        },
+        "accountPaused" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "ListingRequest" : {
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        }
+      }
+    },
+    "OrganizationRequest" : {
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        }
+      }
+    },
+    "SearchRequest" : {
+      "properties" : {
+        "title" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "area_id" : {
+          "type" : "string"
+        },
+        "created_at" : {
+          "type" : "string",
+          "format" : "date"
+        }
+      }
+    },
+    "Organization" : {
+      "required" : [ "name" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "profile_video" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "display_name" : {
+          "type" : "string"
+        },
+        "parent_org_id" : {
+          "type" : "string"
+        },
+        "org_bio" : {
+          "type" : "string"
+        },
+        "org_physician_interest" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "phone" : {
+          "type" : "string"
+        },
+        "phone_confirmed" : {
+          "type" : "boolean"
+        },
+        "address_1" : {
+          "type" : "string"
+        },
+        "address_2" : {
+          "type" : "string"
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "zip_code" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        },
+        "contact_name" : {
+          "type" : "string"
+        },
+        "contact_title" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "is_inactive" : {
+          "type" : "boolean"
+        },
+        "renewal_date" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "created_at" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "updated_at" : {
+          "type" : "string",
+          "format" : "date"
+        }
+      }
+    },
+    "ListingsCandidates" : {
+      "type" : "object",
+      "required" : [ "listing_id" ],
+      "properties" : {
+        "listing_id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "candidate_id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "chat_id" : {
+          "type" : "string"
+        },
+        "reason" : {
+          "type" : "string"
+        },
+        "notes" : {
+          "type" : "string"
+        },
+        "feedback" : {
+          "type" : "string"
+        },
+        "matched_at" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "matched_by" : {
+          "type" : "string"
+        },
+        "created_at" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "updated_at" : {
+          "type" : "string",
+          "format" : "date"
+        }
+      }
+    },
+    "AnalyticsModelResponse" : {
+      "properties" : {
+        "candidate_id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "status" : {
+          "type" : "string",
+          "format" : "uuid"
+        }
+      }
+    },
+    "ArrayOfCandidate" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Candidate"
+      }
+    },
+    "StatusResponse" : {
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "format" : "uuid"
+        }
+      }
+    },
+    "preferredLocation" : {
+      "required" : [ "city", "state" ],
+      "properties" : {
+        "city" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        }
+      }
+    },
+    "QuickinfoResponse" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "about_us" : {
+          "type" : "string"
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string",
+          "format" : "date"
+        }
+      }
+    },
+    "currentLocation" : {
+      "required" : [ "city", "state" ],
+      "properties" : {
+        "city" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UserResponse" : {
+      "properties" : {
+        "organization_id" : {
+          "type" : "string",
+          "format" : "uuid"
+        }
+      }
+    },
+    "OrgDocuments" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "is_deleted" : {
+          "type" : "boolean"
+        },
+        "created_date" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "deleted_date" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "modified_date" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "file" : {
+          "type" : "string"
+        },
+        "created_by_id" : {
+          "type" : "string"
+        },
+        "deleted_by_id" : {
+          "type" : "string"
+        },
+        "modified_by_id" : {
+          "type" : "string"
+        },
+        "organization_id" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Listing" : {
+      "type" : "object",
+      "required" : [ "title" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "area_id" : {
+          "type" : "string"
+        },
+        "work_address" : {
+          "type" : "string"
+        },
+        "specialty_id" : {
+          "type" : "string"
+        },
+        "priority" : {
+          "type" : "string"
+        },
+        "hiring_manager" : {
+          "type" : "string"
+        },
+        "authorized_users" : {
+          "type" : "string"
+        },
+        "primary_language" : {
+          "type" : "string"
+        },
+        "other_languages" : {
+          "type" : "string"
+        },
+        "is_archived" : {
+          "type" : "boolean"
+        },
+        "can_sponsor_visas" : {
+          "type" : "boolean"
+        },
+        "tags" : {
+          "type" : "string"
+        },
+        "last_reminder" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "visa_requirements_id" : {
+          "type" : "string"
+        },
+        "expires_at" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "created_at" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "updated_at" : {
+          "type" : "string",
+          "format" : "date"
+        }
+      }
+    },
+    "ArrayOfOrganizations" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Organization"
+      }
+    },
+    "ArrayOfAnalyticsModelResponse" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/AnalyticsModelResponse"
+      }
+    },
+    "ArrayOfListingsCandidates" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ListingsCandidates"
+      }
+    },
+    "ArrayOfListings" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Listing"
+      }
+    }
+  }
+}
