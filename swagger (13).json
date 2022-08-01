@@ -1,0 +1,809 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A simple API",
+    "version": "1.0.0",
+    "title": "Metropolis API"
+  },
+  "host": "tfobtv78w5.execute-api.us-east-1.amazonaws.com",
+  "basePath": "/api/v1",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/listings": {
+      "post": {
+        "operationId": "CreateListings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingsCreateRequest",
+            "description": "Creates new listing for an organization",
+            "schema": {
+              "$ref": "#/definitions/Listing"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetListings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingsGetRequest",
+            "description": "Returns listing information corresponding to the provided listing ID",
+            "schema": {
+              "$ref": "#/definitions/ListingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Listing"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateListings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingsUpdateRequest",
+            "description": "Adds information to existing listing",
+            "schema": {
+              "$ref": "#/definitions/Listing"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteListings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingsDeleteRequest",
+            "description": "Finds and deletes existing listing according to provided listing ID",
+            "schema": {
+              "$ref": "#/definitions/ListingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/search": {
+      "post": {
+        "operationId": "searchListings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "searchRequest",
+            "description": "Returns listing information corresponding to the provided listing ID",
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfListings"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/quickinfo": {
+      "post": {
+        "operationId": "quickinfoListings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "quickinfoRequest",
+            "description": "Returns listing information on the provided listing ID including: id, title, description, organization, area, day created",
+            "schema": {
+              "$ref": "#/definitions/ListingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/QuickinfoResponse"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/status": {
+      "post": {
+        "operationId": "statusListings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "statusRequest",
+            "description": "Returns the status (position filled, not filled, open, closed) on the listing corresponding to the provided listing ID",
+            "schema": {
+              "$ref": "#/definitions/ListingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/StatusResponse"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/candidates": {
+      "post": {
+        "operationId": "getlistingsCandidates",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "listingCandidatesRequest",
+            "description": "Returns list of candidates matched to a specific listing, determined by provided ID",
+            "schema": {
+              "$ref": "#/definitions/ListingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfListingsCandidates"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/match": {
+      "post": {
+        "operationId": "postListingCandidates",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CreatelistingCandidates",
+            "description": "Creates listing_candidate object for a specific listing",
+            "schema": {
+              "$ref": "#/definitions/ListingsCandidates"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/match/status": {
+      "post": {
+        "operationId": "getMatchStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "MatchStatusCandidates",
+            "description": "Returns the status on a matched candidate with provided candidate ID and listing ID",
+            "schema": {
+              "$ref": "#/definitions/ListingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/StatusResponse"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/analytics": {
+      "post": {
+        "operationId": "getAnalytics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingsAnalytics",
+            "description": "3 different options corresponding to 3 different possible parameters: 1) if listing ID is provided, the function returns a list of the candidates matched with the listing as well as their status. 2) if organization ID is provided the function returns values for the number of total, open, and closed listings. 3) providing candidate id will return the number of matched listings as well as the number of listings at each status (rejected, ready for interview, and placed) ",
+            "schema": {
+              "$ref": "#/definitions/ListingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfAnalyticsModelResponse"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/docs": {
+      "post": {
+        "operationId": "postlistingsDocs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingDocuments",
+            "description": "Adds new document to existing listing",
+            "schema": {
+              "$ref": "#/definitions/ListingDocs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      },
+      "put": {
+        "operationId": "putlistingsDocs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingDocuments",
+            "description": "Updates existing document information on existing listing",
+            "schema": {
+              "$ref": "#/definitions/ListingDocs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      },
+      "get": {
+        "operationId": "getlistingsDocs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingDocuments",
+            "description": "Returns document corresponding to provided listing ID and document ID",
+            "schema": {
+              "$ref": "#/definitions/DocumentRequestListing"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ListingDocs"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deletelistingsDocs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ListingDocuments",
+            "description": "Deletes existing document from existing listing",
+            "schema": {
+              "$ref": "#/definitions/DocumentRequestListing"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    },
+    "/listings/users/": {
+      "post": {
+        "operationId": "ListingsUsers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "searchRequest",
+            "description": "Returns a list of users authorized to make changes to the listing (organization authorized users, hiring manager, listing creator) corresponding to the listing ID provided",
+            "schema": {
+              "$ref": "#/definitions/ListingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfUsers"
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Listing": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "work_address": {
+          "type": "string"
+        },
+        "specialty_id": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "hiring_manager": {
+          "type": "string"
+        },
+        "authorized_users": {
+          "type": "string"
+        },
+        "primary_language": {
+          "type": "string"
+        },
+        "other_languages": {
+          "type": "string"
+        },
+        "is_archived": {
+          "type": "boolean"
+        },
+        "can_sponsor_visas": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "string"
+        },
+        "last_reminder": {
+          "type": "string",
+          "format": "date"
+        },
+        "visa_requirements_id": {
+          "type": "string"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "ListingsCandidates": {
+      "type": "object",
+      "required": [
+        "listing_id"
+      ],
+      "properties": {
+        "listing_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "candidate_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "status": {
+          "type": "string"
+        },
+        "chat_id": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "feedback": {
+          "type": "string"
+        },
+        "matched_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "matched_by": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "ArrayOfListingsCandidates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ListingsCandidates"
+      }
+    },
+    "ArrayOfListings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Listing"
+      }
+    },
+    "SearchRequest": {
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "ListingRequest": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "QuickinfoResponse": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "area": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "StatusResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "AnalyticsModelResponse": {
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "status": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "ArrayOfUsers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Users"
+      }
+    },
+    "Users": {
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "ArrayOfAnalyticsModelResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AnalyticsModelResponse"
+      },
+      "properties": {
+        "listings": {
+          "type": "string"
+        },
+        "open": {
+          "type": "string"
+        },
+        "closed": {
+          "type": "string"
+        },
+        "NumberOfMatchedListings": {
+          "type": "string"
+        },
+        "Rejected": {
+          "type": "string"
+        },
+        "Placed": {
+          "type": "string"
+        },
+        "ReadyForInterview": {
+          "type": "string"
+        }
+      }
+    },
+    "DocumentRequestListing": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "listing_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "ListingDocs": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "listing_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "doc_url": {
+          "type": "string"
+        },
+        "doc_type": {
+          "type": "string"
+        },
+        "doc_name": {
+          "type": "string"
+        },
+        "content_type": {
+          "type": "string",
+          "format": "date"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "byte_size": {
+          "type": "string"
+        },
+        "checksum": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated_by": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
